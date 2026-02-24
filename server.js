@@ -39,6 +39,14 @@ app.get("/students/topper", (req, res) => {
   res.status(200).json(topper);
 });
 
+app.get("/students/top3", (req, res) => {
+  const top3 = [...students]
+    .sort((a, b) => b.cgpa - a.cgpa)
+    .slice(0, 3);
+
+  res.status(200).json(top3);
+});
+
 app.get("/students/average", (req, res) => {
   if (students.length === 0) {
     return res.status(404).json({ message: "No students found" });
